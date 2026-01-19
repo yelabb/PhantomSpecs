@@ -9,12 +9,88 @@
     "type": { "type": "string", "enum": ["metadata", "data"] },
     "data": {}
   },
+  "$defs": {
+    "metadata": {
+      "title": "PLSP v1 Metadata Payload",
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "dataset",
+        "total_packets",
+        "frequency_hz",
+        "num_channels",
+        "duration_seconds",
+        "num_trials"
+      ],
+      "properties": {
+        "dataset": { "type": "string" },
+        "total_packets": { "type": "integer", "minimum": 0 },
+        "frequency_hz": { "type": "integer", "minimum": 1 },
+        "num_channels": { "type": "integer", "minimum": 1 },
+        "duration_seconds": { "type": "number", "minimum": 0 },
+        "num_trials": { "type": "integer", "minimum": 0 },
+
+        "channel_count": { "type": "integer", "minimum": 1 },
+        "sampling_rate_hz": { "type": "integer", "minimum": 1 },
+        "total_samples": { "type": "integer", "minimum": 0 },
+        "trial_count": { "type": "integer", "minimum": 0 },
+
+        "bin_size_ms": { "type": "number", "minimum": 0 }
+      }
+    },
+    "packet": {
+      "title": "PLSP v1 StreamPacket Payload",
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["timestamp", "sequence_number", "spikes", "kinematics", "intention"],
+      "properties": {
+        "timestamp": { "type": "number" },
+        "sequence_number": { "type": "integer", "minimum": 0 },
+        "trial_id": { "type": ["integer", "null"] },
+        "trial_time_ms": { "type": ["number", "null"] },
+
+        "spikes": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["channel_ids", "spike_counts", "bin_size_ms"],
+          "properties": {
+            "channel_ids": { "type": "array", "items": { "type": "integer" } },
+            "spike_counts": { "type": "array", "items": { "type": "integer" } },
+            "bin_size_ms": { "type": "number", "minimum": 0 }
+          }
+        },
+
+        "kinematics": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["vx", "vy"],
+          "properties": {
+            "vx": { "type": "number" },
+            "vy": { "type": "number" },
+            "x": { "type": ["number", "null"] },
+            "y": { "type": ["number", "null"] }
+          }
+        },
+
+        "intention": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "target_id": { "type": ["integer", "null"] },
+            "target_x": { "type": ["number", "null"] },
+            "target_y": { "type": ["number", "null"] },
+            "distance_to_target": { "type": ["number", "null"] }
+          }
+        }
+      }
+    }
+  },
   "allOf": [
     {
       "if": { "properties": { "type": { "const": "metadata" } } },
       "then": {
         "properties": {
-          "data": { "$ref": "./metadata.schema.json" }
+          "data": { "$ref": "#/$defs/metadata" }
         }
       }
     },
@@ -22,7 +98,7 @@
       "if": { "properties": { "type": { "const": "data" } } },
       "then": {
         "properties": {
-          "data": { "$ref": "./packet.schema.json" }
+          "data": { "$ref": "#/$defs/packet" }
         }
       }
     }
