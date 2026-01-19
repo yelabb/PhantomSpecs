@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - PhantomLoop decoder interface JSON schema (`schemas/phantomloop/v1/decoder.schema.json`)
+- PhantomCore native types JSON schema (`schemas/phantomcore/v1/types.schema.json`)
+- PhantomCore test vectors (`vectors/phantomcore/v1/types_example.json`)
 
 ### Changed
 - Updated validation script to cover all component schemas

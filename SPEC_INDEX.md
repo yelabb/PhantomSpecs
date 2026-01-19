@@ -17,6 +17,7 @@
 
 - v1 overview: [protocol/phantomcore/v1/OVERVIEW.md](protocol/phantomcore/v1/OVERVIEW.md)
 - v1 stream compatibility: [protocol/phantomcore/v1/STREAM_COMPATIBILITY.md](protocol/phantomcore/v1/STREAM_COMPATIBILITY.md)
+- v1 native types schema: [schemas/phantomcore/v1/types.schema.json](schemas/phantomcore/v1/types.schema.json)
 
 ## PhantomCodec (Rust)
 

@@ -91,10 +91,34 @@ def validate_phantomloop_v1() -> None:
     jsonschema.validate(instance=example["output"], schema=output_schema)
 
 
+def validate_phantomcore_v1() -> None:
+    schema_path = ROOT / "schemas" / "phantomcore" / "v1" / "types.schema.json"
+    schema = _load_schema(schema_path)
+
+    example_path = ROOT / "vectors" / "phantomcore" / "v1" / "types_example.json"
+    example = _load_json(example_path)
+
+    # Validate NeuralPacket
+    packet_schema = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        **schema["$defs"]["NeuralPacket"],
+        "$defs": schema.get("$defs", {})
+    }
+    jsonschema.validate(instance=example["neural_packet"], schema=packet_schema)
+
+    # Validate DecoderOutput
+    decoder_schema = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        **schema["$defs"]["DecoderOutput"]
+    }
+    jsonschema.validate(instance=example["decoder_output"], schema=decoder_schema)
+
+
 def main() -> None:
     validate_phantomlink_v1()
     validate_phantomcodec_v1()
     validate_phantomloop_v1()
+    validate_phantomcore_v1()
     print("OK: schemas and vectors validate")
 
 

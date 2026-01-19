@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phantom-suite/specs/phantomcore/v1/types.schema.json",
+  "title": "PhantomCore v1 Native Types",
+  "description": "JSON schema representation of PhantomCore native C++ types for PLSP consumption.",
+  "$defs": {
+    "Vec2": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      }
+    },
+    "Velocity2D": {
+      "type": "object",
+      "required": ["vx", "vy"],
+      "properties": {
+        "vx": { "type": "number" },
+        "vy": { "type": "number" }
+      }
+    },
+    "Kinematics": {
+      "type": "object",
+      "required": ["x", "y", "vx", "vy"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "vx": { "type": "number" },
+        "vy": { "type": "number" }
+      }
+    },
+    "Intention": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "target_id": { "type": ["integer", "null"] },
+        "target_x": { "type": ["number", "null"] },
+        "target_y": { "type": ["number", "null"] },
+        "distance_to_target": { "type": ["number", "null"] }
+      }
+    },
+    "NeuralPacket": {
+      "title": "NeuralPacket",
+      "description": "Single neural data packet mapped from PLSP StreamPacket",
+      "type": "object",
+      "required": ["sequence", "timestamp", "spike_counts", "kinematics"],
+      "properties": {
+        "sequence": { "type": "integer", "minimum": 0 },
+        "trial_id": { "type": ["integer", "null"] },
+        "timestamp": { "type": "number", "description": "Unix epoch seconds" },
+        "spike_counts": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "description": "Spike counts per channel"
+        },
+        "kinematics": { "$ref": "#/$defs/Kinematics" },
+        "intention": { "$ref": "#/$defs/Intention" }
+      }
+    },
+    "DecoderOutput": {
+      "title": "DecoderOutput",
+      "description": "Decoder output from Kalman filter or neural network",
+      "type": "object",
+      "required": ["x", "y", "vx", "vy"],
+      "properties": {
+        "x": { "type": "number", "description": "Estimated cursor x position" },
+        "y": { "type": "number", "description": "Estimated cursor y position" },
+        "vx": { "type": "number", "description": "Estimated velocity x" },
+        "vy": { "type": "number", "description": "Estimated velocity y" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1, "default": 1.0 },
+        "processing_time_us": { "type": "number", "minimum": 0, "description": "Processing time in microseconds" }
+      }
+    },
+    "LatencyStats": {
+      "title": "LatencyStats",
+      "type": "object",
+      "properties": {
+        "min_us": { "type": "number" },
+        "max_us": { "type": "number" },
+        "mean_us": { "type": "number" },
+        "std_us": { "type": "number" },
+        "p50_us": { "type": "number" },
+        "p95_us": { "type": "number" },
+        "p99_us": { "type": "number" },
+        "sample_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "PerformanceMetrics": {
+      "title": "PerformanceMetrics",
+      "type": "object",
+      "properties": {
+        "decode_latency": { "$ref": "#/$defs/LatencyStats" },
+        "network_latency": { "$ref": "#/$defs/LatencyStats" },
+        "total_latency": { "$ref": "#/$defs/LatencyStats" },
+        "packets_per_second": { "type": "number" },
+        "total_packets": { "type": "integer", "minimum": 0 },
+        "dropped_packets": { "type": "integer", "minimum": 0 },
+        "accuracy": { "type": "number" },
+        "mean_error": { "type": "number" }
+      }
+    }
+  }
+}
