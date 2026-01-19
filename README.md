@@ -1,10 +1,13 @@
 # PhantomSpecs
 
 PhantomSpecs is the normative specification repository for the **Phantom Suite**:
-- PhantomLink (Python streaming server)
-- PhantomLoop (TypeScript/React visualization client)
-- PhantomCore (C++ decoding/processing library)
-- PhantomCodec (Rust codec + wire framing)
+- **PhantomLink** (Python streaming server): https://github.com/yelabb/PhantomLink
+- **PhantomLoop** (TypeScript/React visualization client): https://github.com/yelabb/PhantomLoop
+- **PhantomCore** (C++ decoding/processing library): https://github.com/yelabb/PhantomCore
+- **PhantomCodec** (Rust codec + wire framing): https://github.com/yelabb/PhantomCodec
+
+This repository:
+- **PhantomSpecs**: https://github.com/yelabb/PhantomSpecs
 
 This repo exists to prevent protocol and data-model drift across implementations.
 
@@ -14,11 +17,19 @@ This repo exists to prevent protocol and data-model drift across implementations
 - **Schemas** (machine-readable): `schemas/**/v1/*`
 - **Vectors** (golden examples to test compatibility): `vectors/**/v1/*`
 
+See the index of available specs in [SPEC_INDEX.md](SPEC_INDEX.md).
+
 ## How to use
 
 - Implementations MUST follow the **normative** documents in `protocol/`.
 - Implementations SHOULD validate inputs/outputs against `schemas/`.
 - Implementations SHOULD include CI tests that round-trip or validate `vectors/`.
+
+### Validate locally
+From this repo root:
+
+- Install tooling deps: `python -m pip install -r tooling/requirements.txt`
+- Run validation: `python tooling/validate_vectors.py`
 
 ## Normative language
 
