@@ -1,0 +1,20 @@
+{
+  "description": "Example decoder input/output pair for PhantomLoop v1",
+  "input": {
+    "spikes": [0, 1, 0, 2, 0, 0, 3, 0, 1, 0],
+    "kinematics": {
+      "x": 10.5,
+      "y": -5.2,
+      "vx": 2.1,
+      "vy": -0.8
+    },
+    "history": []
+  },
+  "output": {
+    "x": 10.3,
+    "y": -5.0,
+    "vx": 2.0,
+    "vy": -0.7,
+    "latency": 0.45
+  }
+}

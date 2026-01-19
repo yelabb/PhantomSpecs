@@ -67,9 +67,34 @@ def validate_phantomcodec_v1() -> None:
             raise AssertionError(f"{ex['name']}: selector mismatch")
 
 
+def validate_phantomloop_v1() -> None:
+    schema_path = ROOT / "schemas" / "phantomloop" / "v1" / "decoder.schema.json"
+    schema = _load_schema(schema_path)
+
+    # Validate decoder example against schema definitions
+    example_path = ROOT / "vectors" / "phantomloop" / "v1" / "decoder_example.json"
+    example = _load_json(example_path)
+
+    # Validate input against DecoderInput definition
+    input_schema = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        **schema["$defs"]["DecoderInput"],
+        "$defs": schema.get("$defs", {})
+    }
+    jsonschema.validate(instance=example["input"], schema=input_schema)
+
+    # Validate output against DecoderOutput definition
+    output_schema = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        **schema["$defs"]["DecoderOutput"]
+    }
+    jsonschema.validate(instance=example["output"], schema=output_schema)
+
+
 def main() -> None:
     validate_phantomlink_v1()
     validate_phantomcodec_v1()
+    validate_phantomloop_v1()
     print("OK: schemas and vectors validate")
 
 

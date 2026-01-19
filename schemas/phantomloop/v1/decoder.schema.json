@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phantom-suite/specs/phantomloop/v1/decoder.schema.json",
+  "title": "PhantomLoop v1 Decoder Interface",
+  "description": "Defines the input/output contract for decoders running in PhantomLoop.",
+  "$defs": {
+    "DecoderInput": {
+      "title": "DecoderInput",
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["spikes", "kinematics", "history"],
+      "properties": {
+        "spikes": {
+          "type": "array",
+          "items": { "type": "number" },
+          "description": "Spike counts per channel (typically integers)"
+        },
+        "kinematics": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": ["x", "y", "vx", "vy"],
+          "properties": {
+            "x": { "type": ["number", "null"] },
+            "y": { "type": ["number", "null"] },
+            "vx": { "type": ["number", "null"] },
+            "vy": { "type": ["number", "null"] }
+          },
+          "description": "Ground truth kinematics (may have null values)"
+        },
+        "history": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/DecoderOutput" },
+          "description": "Recent decoder outputs (bounded, e.g., last 40)"
+        }
+      }
+    },
+    "DecoderOutput": {
+      "title": "DecoderOutput",
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["x", "y", "vx", "vy", "latency"],
+      "properties": {
+        "x": { "type": "number", "description": "Estimated cursor x position" },
+        "y": { "type": "number", "description": "Estimated cursor y position" },
+        "vx": { "type": "number", "description": "Estimated velocity x" },
+        "vy": { "type": "number", "description": "Estimated velocity y" },
+        "latency": { "type": "number", "minimum": 0, "description": "Decoder compute latency in milliseconds" }
+      }
+    }
+  }
+}

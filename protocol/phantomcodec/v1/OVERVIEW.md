@@ -13,6 +13,15 @@ This v1 spec standardizes:
 This spec does **not** standardize:
 - Transport (WebSocket/UDP/etc.)
 - Session semantics, timestamps, or envelopes (handled by PLSP)
+- Implementation-specific APIs (e.g., function signatures, memory management)
 
 ## Normative language
 The key words **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** are to be interpreted as described in RFC 2119.
+
+## Implementation notes
+The reference Rust implementation (`PhantomCodec` crate) provides a `#![no_std]` compatible API. Implementors of other languages should follow the wire format described in [FRAME_HEADER.md](FRAME_HEADER.md) and [STRATEGIES.md](STRATEGIES.md).
+
+Key implementation considerations:
+- All multi-byte integers in the header are **big-endian**
+- The payload format is strategy-specific and defined per strategy
+- Decoders **MUST** validate magic bytes and version before processing
