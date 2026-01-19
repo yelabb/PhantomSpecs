@@ -1,0 +1,26 @@
+{
+  "examples": [
+    {
+      "name": "delta_varint_1024ch",
+      "model": {
+        "magic": "PHDC",
+        "version": 1,
+        "channel_count": 1024,
+        "strategy_id": 0,
+        "rice_k": 0
+      },
+      "bytes_hex": "5048444301040000"
+    },
+    {
+      "name": "rice_512ch_k3",
+      "model": {
+        "magic": "PHDC",
+        "version": 1,
+        "channel_count": 512,
+        "strategy_id": 1,
+        "rice_k": 3
+      },
+      "bytes_hex": "5048444301020007"
+    }
+  ]
+}

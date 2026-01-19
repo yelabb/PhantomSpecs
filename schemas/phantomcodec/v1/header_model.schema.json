@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phantom-suite/specs/phantomcodec/v1/header_model.schema.json",
+  "title": "PhantomCodec v1 Header Model (Logical)",
+  "description": "JSON model of the PhantomCodec v1 binary header. The actual on-wire format is 8 bytes; see protocol/phantomcodec/v1/FRAME_HEADER.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["magic", "version", "channel_count", "strategy_id", "rice_k"],
+  "properties": {
+    "magic": { "type": "string", "const": "PHDC" },
+    "version": { "type": "integer", "const": 1 },
+    "channel_count": { "type": "integer", "minimum": 0, "maximum": 65535 },
+    "strategy_id": { "type": "integer", "enum": [0, 1, 2, 3] },
+    "rice_k": { "type": "integer", "minimum": 0, "maximum": 3 }
+  }
+}

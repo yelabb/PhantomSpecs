@@ -1,0 +1,11 @@
+{
+  "type": "metadata",
+  "data": {
+    "dataset": "MC_Maze",
+    "total_packets": 11760,
+    "frequency_hz": 40,
+    "num_channels": 142,
+    "duration_seconds": 294.0,
+    "num_trials": 100
+  }
+}

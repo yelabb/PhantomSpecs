@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phantom-suite/specs/phantomlink/v1/metadata.schema.json",
+  "title": "PLSP v1 Metadata Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "dataset",
+    "total_packets",
+    "frequency_hz",
+    "num_channels",
+    "duration_seconds",
+    "num_trials"
+  ],
+  "properties": {
+    "dataset": { "type": "string" },
+    "total_packets": { "type": "integer", "minimum": 0 },
+    "frequency_hz": { "type": "integer", "minimum": 1 },
+    "num_channels": { "type": "integer", "minimum": 1 },
+    "duration_seconds": { "type": "number", "minimum": 0 },
+    "num_trials": { "type": "integer", "minimum": 0 },
+
+    "channel_count": { "type": "integer", "minimum": 1 },
+    "sampling_rate_hz": { "type": "integer", "minimum": 1 },
+    "total_samples": { "type": "integer", "minimum": 0 },
+    "trial_count": { "type": "integer", "minimum": 0 },
+
+    "bin_size_ms": { "type": "number", "minimum": 0 }
+  }
+}

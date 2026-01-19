@@ -1,0 +1,26 @@
+{
+  "type": "data",
+  "data": {
+    "timestamp": 1710000000.125,
+    "sequence_number": 0,
+    "spikes": {
+      "channel_ids": [0, 1, 2, 3],
+      "spike_counts": [0, 1, 0, 2],
+      "bin_size_ms": 25.0
+    },
+    "kinematics": {
+      "vx": 0.1,
+      "vy": -0.2,
+      "x": 1.0,
+      "y": -1.0
+    },
+    "intention": {
+      "target_id": 3,
+      "target_x": 5.0,
+      "target_y": -2.0,
+      "distance_to_target": 1.25
+    },
+    "trial_id": 0,
+    "trial_time_ms": 0.0
+  }
+}

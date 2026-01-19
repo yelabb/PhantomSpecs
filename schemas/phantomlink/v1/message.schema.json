@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phantom-suite/specs/phantomlink/v1/message.schema.json",
+  "title": "PLSP v1 Message Envelope",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["type", "data"],
+  "properties": {
+    "type": { "type": "string", "enum": ["metadata", "data"] },
+    "data": {}
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "metadata" } } },
+      "then": {
+        "properties": {
+          "data": { "$ref": "./metadata.schema.json" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "data" } } },
+      "then": {
+        "properties": {
+          "data": { "$ref": "./packet.schema.json" }
+        }
+      }
+    }
+  ]
+}

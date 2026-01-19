@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phantom-suite/specs/phantomlink/v1/packet.schema.json",
+  "title": "PLSP v1 StreamPacket Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["timestamp", "sequence_number", "spikes", "kinematics", "intention"],
+  "properties": {
+    "timestamp": { "type": "number" },
+    "sequence_number": { "type": "integer", "minimum": 0 },
+    "trial_id": { "type": ["integer", "null"] },
+    "trial_time_ms": { "type": ["number", "null"] },
+
+    "spikes": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["channel_ids", "spike_counts", "bin_size_ms"],
+      "properties": {
+        "channel_ids": { "type": "array", "items": { "type": "integer" } },
+        "spike_counts": { "type": "array", "items": { "type": "integer" } },
+        "bin_size_ms": { "type": "number", "minimum": 0 }
+      }
+    },
+
+    "kinematics": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["vx", "vy"],
+      "properties": {
+        "vx": { "type": "number" },
+        "vy": { "type": "number" },
+        "x": { "type": ["number", "null"] },
+        "y": { "type": ["number", "null"] }
+      }
+    },
+
+    "intention": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "target_id": { "type": ["integer", "null"] },
+        "target_x": { "type": ["number", "null"] },
+        "target_y": { "type": ["number", "null"] },
+        "distance_to_target": { "type": ["number", "null"] }
+      }
+    }
+  }
+}
