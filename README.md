@@ -35,3 +35,13 @@ From this repo root:
 ## Normative language
 
 This repository uses RFC 2119 keywords: **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, **MAY**.
+
+## Acknowledgments
+
+This project was developed with assistance from AI coding assistants and workflows:
+- Claude Opus 4.5 (Anthropic)
+- Claude Sonnet 4.5 (Anthropic)
+- Gemini 3.0 Pro (Google)
+- GPT 5.2 (OpenAI)
+
+All code was tested and validated by the author.
