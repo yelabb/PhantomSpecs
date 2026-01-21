@@ -1,10 +1,11 @@
 # PhantomSpecs
 
-PhantomSpecs is the normative specification repository for the **Phantom Suite**:
+PhantomSpecs is the normative specification repository for the **Phantom Stack**:
+- **PhantomX** (Python ML research platform): https://github.com/yelabb/PhantomX
 - **PhantomLink** (Python streaming server): https://github.com/yelabb/PhantomLink
 - **PhantomLoop** (TypeScript/React visualization client): https://github.com/yelabb/PhantomLoop
 - **PhantomCore** (C++ decoding/processing library): https://github.com/yelabb/PhantomCore
-- **PhantomCodec** (Rust codec + wire framing): https://github.com/yelabb/PhantomCodec
+- **PhantomZip** (Rust codec + wire framing): https://github.com/yelabb/PhantomZip
 
 This repository:
 - **PhantomSpecs**: https://github.com/yelabb/PhantomSpecs
